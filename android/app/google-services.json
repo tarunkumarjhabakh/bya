@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "245400489251",
+    "project_id": "bya-db",
+    "storage_bucket": "bya-db.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:245400489251:android:a0e79662ffeabaedc75096",
+        "android_client_info": {
+          "package_name": "com.example.bya"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvv_H3xfYzkVVjgX4hydAAMSSUx1oNNDw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:245400489251:android:2887578b60b6e5a6c75096",
+        "android_client_info": {
+          "package_name": "com.example.bya_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCvv_H3xfYzkVVjgX4hydAAMSSUx1oNNDw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
