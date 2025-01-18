@@ -1,4 +1,6 @@
+import 'package:bya/gorav_register_page.dart';
 import 'package:bya/home_page.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -16,8 +18,31 @@ class _GoravLoginPage extends State<GoravLoginPage> {
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController otpController = TextEditingController();
 
+  Future<bool> checkPhoneNumber(String phno) async {
+    try {
+      final collection = FirebaseFirestore.instance.collection('bomer');
+      final snapshot = await collection.get();
+
+      for (var item in snapshot.docs) {
+        if (item['phno'] == phno) return true;
+      }
+      return false;
+    } catch (e) {
+      print('Error: ${e}');
+      return false;
+    }
+  }
+
   Future<void> sendOTP(String phoneNumber) async {
     try {
+      bool member = await checkPhoneNumber(phoneNumber);
+      if (!member) {
+        print('Taking to register Page');
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => GoravRegisterPage()));
+        return;
+      }
+      print('Already a member!');
       await FirebaseAuth.instance.verifyPhoneNumber(
           phoneNumber: '+91$phoneNumber',
           timeout: Duration(seconds: 10),
@@ -44,7 +69,7 @@ class _GoravLoginPage extends State<GoravLoginPage> {
       setState(() {
         isLoading = false;
       });
-      print(e);
+      print('Error ${e}');
     }
   }
 
@@ -155,7 +180,7 @@ class _GoravLoginPage extends State<GoravLoginPage> {
                     child: Input(
                       labelText: 'Phone number',
                       icon: Icons.phone_iphone_outlined,
-                      keyboardType: TextInputType.phone,
+                      keyboardType: TextInputType.number,
                       controller: phoneController,
                     ),
                   ),
